@@ -3,7 +3,12 @@ body {
 	font-family: 'Century Gothic', sans-serif;
 	background-image: url(../img/geometry.jpg);
 }
+#photo {
+	position: relative;
+	max-width: 100%;
+	height: inherit;
 
+}
 #photoBooth {
 	margin-top: .2em;
 	padding: 10px;
