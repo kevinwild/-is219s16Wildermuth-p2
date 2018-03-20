@@ -40,17 +40,47 @@ function swapPhoto() {
 }
 
 $(document).ready( function() {
-	//$('.details').hide();
+	$('.details').hide();
 	// Get JSON store it in IMGS object
 	imgJson = $.getJSON('images.json',function(response){
-		GalleryImage(response);
-		
+		GalleryImage(response);	
 	})
+
+
+
+	//...... Control moreIndicator
+	$('.moreIndicator').click(function(){
+		if($('.details').css('display') == 'none'){
+			$('.details').fadeIn();
+			 $(this).addClass("rot270");
+
+
+		}else{
+			$('.details').fadeOut();
+			$(this).removeClass("rot270");
+
+		}
+	});
+
+	//...... Control prevPhoto
+	$('#prevPhoto').click(function(){
+		swapPosition--;
+		GalleryImage(null);
+	});
+	//...... Control nextPhoto
+	$('#nextPhoto').click(function(){
+		swapPosition++;
+		GalleryImage(null);
+
+	});
+
+
 	
-});
+});//... END .... Document onLoad
 function GalleryImage(rawCall) {
 // Initialize the first image on load before swap is called
 	if(rawCall != null){
+
 		imgJson = rawCall;
 		imgDesc = imgJson.images[swapPosition]['description']
 		imgLoc = imgJson.images[swapPosition]['imgLocation']
@@ -59,12 +89,10 @@ function GalleryImage(rawCall) {
 		$('#photo').attr("src", imgPath);
 		changeDetails(imgLoc, imgDesc, imgDate);
 		swapPosition++;
-		return true;
 	}
-	if(swapPosition >= imgJson.images.length){
-		swapPosition = 0;
-	}
+
 	else{
+		checkPosition();
 		imgDesc = imgJson.images[swapPosition]['description']
 		imgLoc = imgJson.images[swapPosition]['imgLocation']
 		imgDate = imgJson.images[swapPosition]['date']
@@ -79,6 +107,15 @@ function GalleryImage(rawCall) {
 
 
 }
+function checkPosition(){
+	if(swapPosition >= imgJson.images.length){
+		swapPosition = 0;
+	}
+	if(swapPosition < 0){
+		swapPosition = imgJson.images.length - 1;
+	}
+}
+
 
 function changeDetails(ploc,pdesc,pdate){
 	$('#spanLoc').html(ploc);
