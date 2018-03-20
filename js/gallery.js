@@ -38,6 +38,7 @@ function swapPhoto() {
 	console.log('swap photo');
 	if($('#initalLoad').val() != 0){
 		GalleryImage(null);
+		swapPosition++;
 	}
 }
 
@@ -107,7 +108,6 @@ function GalleryImage(rawCall) {
 		imgPath = imgJson.images[swapPosition]['imgPath']
 		$('#photo').attr("src", imgPath);
 		changeDetails(imgLoc, imgDesc, imgDate);
-		swapPosition++;
 
 	}
 
