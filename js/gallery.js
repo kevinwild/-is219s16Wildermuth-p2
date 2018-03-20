@@ -40,22 +40,32 @@ function swapPhoto() {
 }
 
 $(document).ready( function() {
-	$('.details').hide();
+	//$('.details').hide();
 	// Get JSON store it in IMGS object
 	imgJson = $.getJSON('images.json',function(response){
 		GalleryImage(response);
 		
 	})
-
-
 	
 });
 function GalleryImage(rawCall) {
 	if(rawCall != null){
 		imgJson = rawCall;
-		$('#photo').attr("src",imgJson.images[0]['imgPath']);
+
+		imgDesc = imgJson.images[0]['description']
+		imgLoc = imgJson.images[0]['imgLocation']
+		imgDate = imgJson.images[0]['date']
+		imgPath = imgJson.images[0]['imgPath']
+
+		$('#photo').attr("src", imgPath);
+		changeDetails(imgLoc, imgDesc, imgDate);
+
 	}
 }
-function changeDetails(){
-	
+function changeDetails(ploc,pdesc,pdate){
+	$('#spanLoc').html(ploc);
+	$('#spanDesc').html(pdesc);
+	$('#spanDate').html(pdate);
 }
+
+
