@@ -1,0 +1,34 @@
+{
+    "images": [
+        {
+            "imgPath": "img/programming/1.jpg",
+            "imgLocation": "Some where crazy",
+            "description": "this is an image of something that looks out of the matrix",
+            "date": "01/01/2018"
+        },
+        {
+            "imgPath": "img/programming/2.jpg",
+            "imgLocation": "A keyboard up close",
+            "description": "What could they possibly be coding?",
+            "date": "2/11/2018"
+        },
+        {
+            "imgPath": "img/programming/3.jpg",
+            "imgLocation": "Programming Playing Cards - Las Vegas",
+            "description": "Pretty cool what do you think?",
+            "date": "5/11/2017"
+        },
+        {
+            "imgPath": "img/programming/4.jpg",
+            "imgLocation": "Blah",
+            "description": "Just Blah",
+            "date": "5/5/2017"
+        },
+        {
+            "imgPath": "img/programming/5.jpg",
+            "imgLocation": "Upclose Code",
+            "description": "Pixily",
+            "date": "4/20/2018"
+        }
+  ]
+}

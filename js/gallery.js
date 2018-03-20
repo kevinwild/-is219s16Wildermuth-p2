@@ -36,15 +36,25 @@ function animate() {
 var swapPosition = 0; // keeps track of imgJson position, limit will reset at dynamic length 
 function swapPhoto() {
 	console.log('swap photo');
-	GalleryImage(null);
+	if($('#initalLoad').val() != 0){
+		GalleryImage(null);
+	}
 }
 
 $(document).ready( function() {
 	$('.details').hide();
-	// Get JSON store it in IMGS object
-	imgJson = $.getJSON('images.json',function(response){
-		GalleryImage(response);	
-	})
+	// Prompt USER WHICH IMAGE LIBRARY THEY WANT TO LOAD?
+	$('#exampleModal').modal({show: true, backdrop: 'static'});  
+	$('#loadImgs').click(function(){
+		$('#initalLoad').val('1');
+		var galleryType = $("input:radio[name ='galleryType']:checked").val();
+		// Get JSON store it in IMGS object
+		imgJson = $.getJSON(galleryType+'.json',function(response){
+			GalleryImage(response);	
+		})
+		$('#exampleModal').modal('hide');
+
+	});
 
 
 
@@ -71,14 +81,13 @@ $(document).ready( function() {
 	$('#nextPhoto').click(function(){
 		swapPosition++;
 		GalleryImage(null);
-
 	});
 
 
 	
 });//... END .... Document onLoad
 function GalleryImage(rawCall) {
-// Initialize the first image on load before swap is called
+// Initialize JSON OBJ and the first image on load before swap is called
 	if(rawCall != null){
 
 		imgJson = rawCall;
@@ -90,7 +99,6 @@ function GalleryImage(rawCall) {
 		changeDetails(imgLoc, imgDesc, imgDate);
 		swapPosition++;
 	}
-
 	else{
 		checkPosition();
 		imgDesc = imgJson.images[swapPosition]['description']
@@ -121,6 +129,12 @@ function changeDetails(ploc,pdesc,pdate){
 	$('#spanLoc').html(ploc);
 	$('#spanDesc').html(pdesc);
 	$('#spanDate').html(pdate);
+}
+
+function selectFile(){
+	imgJson = $.getJSON('images.json',function(response){
+		GalleryImage(response);	
+	})
 }
 
 
